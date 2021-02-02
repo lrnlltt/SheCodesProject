@@ -91,13 +91,17 @@ function getWeather(response) {
 
   document.querySelector("#city").innerHTML = response.data.name;
 
-  document.querySelector("#conditions").innerHTML = response.data.weather[0].description;
+  document.querySelector("#description").innerHTML = response.data.weather[0].description;
 
   document.querySelector("#feels-like").innerHTML = Math.round(response.data.main.feels_like); 
 
   document.querySelector("#humidity").innerHTML = response.data.main.humidity
   
   document.querySelector("#wind").innerHTML = response.data.wind.speed;
+  
+  document.querySelector("#icon").setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
+
+  document.querySelector("#icon").setAttribute("alt", `${response.data.weather[0].description}`)
 }
 
 let currentTempButton = document.querySelector("#current-button");
@@ -124,3 +128,6 @@ function fahrenheitConversion(event) {
 
 let fahrenheitChange = document.querySelector("#fahrenheit-link");
 fahrenheitChange.addEventListener("click", fahrenheitConversion); 
+
+//5-Day Forecast 
+
