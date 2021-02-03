@@ -41,7 +41,7 @@ function currentTime() {
 
 let displayTime = document.querySelector("h4");
 displayTime.innerHTML = currentTime();
-
+let currentDay = currentTime(day); 
 
 // Search Engine 
 
@@ -49,26 +49,34 @@ function search(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-bar");
 
-  let city = document.querySelector("#city");
     if (searchInput.value) {
         city.innerHTML = `${searchInput.value}`; 
     } else {
       alert(`Please enter a city`);
     }
 
-  let apiKey = "560ccf0a9b6f4d30ed340bdb4dfaf585";
-  let units = "metric";
+  
   let cityName = searchInput.value;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=${units}`;
   
   axios.get(`${apiUrl}`).then(getWeather);
 }
 
+
+// Display on launch 
+
+let city = document.querySelector("#city");
+city.innerHTML = "Melbourne";
+let apiKey = "560ccf0a9b6f4d30ed340bdb4dfaf585";
+let units = "metric";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Melbourne&appid=${apiKey}&units=${units}`
+axios.get(`${apiUrl}`).then(getWeather);
+
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", search);
 
 
-// Current Temp & Current Location Button 
+// Current Temp & Current Location Button Changes
 
 function getCurrentPosition() {
  navigator.geolocation.getCurrentPosition(showPosition);
@@ -108,6 +116,7 @@ function getWeather(response) {
   iconElement.setAttribute("alt", `${response.data.weather[0].description}`);
 }
 
+
 let currentTempButton = document.querySelector("#current-button");
 currentTempButton.addEventListener("click", getCurrentPosition);
 
@@ -135,3 +144,33 @@ fahrenheitChange.addEventListener("click", fahrenheitConversion);
 
 //5-Day Forecast 
 
+function dayCalculator() {
+  let now = newDate(); 
+
+  let day = now.getDay(); 
+
+  let forecastDay = day++;
+   
+  let weekDays = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ];
+
+  let displayDay = weekDays[forecastDay]; 
+
+  document.querySelector("#forecast-day").innerHTML = ${displayDay}; 
+
+}
+
+function displayForecast(response) {
+  console.log(response.data);
+  document.querySelector("#forecast-day").innerHTML = 
+}
+
+let apiUrl5Day = `https://api.openweathermap.org/data/2.5/forecast?q=Melbourne&appid=${apiKey}&units=${units}`
+axios.get(apiUrl5Day).then(displayForecast);
