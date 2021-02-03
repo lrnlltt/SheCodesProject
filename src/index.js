@@ -175,7 +175,7 @@ function displayForecast(response) {
   for (let index = 0; index < 5; index++) {
     forecast = response.data.list[index];
     forecastElement.innerHTML += `
-          <span id="forecast-day">${dayCalculator(index)}</span>
+          <span id="forecast-day">${dayCalculator()}</span>
           <img 
             src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png"
             id="forecast-icon"
