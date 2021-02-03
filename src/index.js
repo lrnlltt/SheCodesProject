@@ -41,7 +41,6 @@ function currentTime() {
 
 let displayTime = document.querySelector("h4");
 displayTime.innerHTML = currentTime();
-let currentDay = currentTime(day); 
 
 // Search Engine 
 
@@ -145,11 +144,11 @@ fahrenheitChange.addEventListener("click", fahrenheitConversion);
 //5-Day Forecast 
 
 function dayCalculator() {
-  let now = newDate(); 
+  let now = new Date(); 
 
   let day = now.getDay(); 
 
-  let forecastDay = day++;
+  let forecastDay = ++day;
    
   let weekDays = [
     "Sunday",
@@ -161,15 +160,29 @@ function dayCalculator() {
     "Saturday"
   ];
 
-  let displayDay = weekDays[forecastDay]; 
+  let displayDay = weekDays[forecastDay];
 
-  document.querySelector("#forecast-day").innerHTML = ${displayDay}; 
-
+  return displayDay;
 }
+
 
 function displayForecast(response) {
   console.log(response.data);
-  document.querySelector("#forecast-day").innerHTML = 
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTMl = null; 
+  
+
+  for (let index = 0; index < 5; index++) {
+    forecast = response.data.list[index];
+    forecastElement.innerHTML += `
+          <span id="forecast-day">${dayCalculator(index)}</span>
+          <img 
+            src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png"
+            id="forecast-icon"
+            alt="weather icon"> 
+          <span id="forecast-temp">${Math.round(forecast.main.temp)}°</span>
+          `;
+  }
 }
 
 let apiUrl5Day = `https://api.openweathermap.org/data/2.5/forecast?q=Melbourne&appid=${apiKey}&units=${units}`
