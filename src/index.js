@@ -87,7 +87,7 @@ function showPosition(position) {
 function getWeather(response) {
   console.log(response.data)
 
-  let iconElement = document.querySelector("#icon");
+  let iconElement = document.querySelector("#weather-icon");
   
   document.querySelector("#temp").innerHTML = Math.round(response.data.main.temp);
 
@@ -103,7 +103,7 @@ function getWeather(response) {
   
   iconElement.setAttribute(
     "src", 
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}.png`);
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
 
   iconElement.setAttribute("alt", `${response.data.weather[0].description}`);
 }

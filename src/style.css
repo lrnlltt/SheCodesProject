@@ -138,6 +138,6 @@ span #forecast-temp {
   color: #ffa828;
 }
 
-#conditions {
+#description {
   text-transform: capitalize;
 }
