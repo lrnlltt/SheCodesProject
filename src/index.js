@@ -86,6 +86,8 @@ function showPosition(position) {
 
 function getWeather(response) {
   console.log(response.data)
+
+  let iconElement = document.querySelector("#icon");
   
   document.querySelector("#temp").innerHTML = Math.round(response.data.main.temp);
 
@@ -95,13 +97,15 @@ function getWeather(response) {
 
   document.querySelector("#feels-like").innerHTML = Math.round(response.data.main.feels_like); 
 
-  document.querySelector("#humidity").innerHTML = response.data.main.humidity
+  document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   
   document.querySelector("#wind").innerHTML = response.data.wind.speed;
   
-  document.querySelector("#icon").setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
+  iconElement.setAttribute(
+    "src", 
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}.png`);
 
-  document.querySelector("#icon").setAttribute("alt", `${response.data.weather[0].description}`)
+  iconElement.setAttribute("alt", `${response.data.weather[0].description}`);
 }
 
 let currentTempButton = document.querySelector("#current-button");

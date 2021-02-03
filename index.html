@@ -41,24 +41,22 @@
 
                 <!-- WEATHER SECTION -->
                 <div class="row">
-                    <div class="col-6 current-temp">
+                    <div class="col-7 current-temp">
                         <h2 id="city">Melbourne</h2>
                         <h4 id="current-time-display">Saturday 12:00pm</h4>
                         <div class="weather">
                             <h3 id="description">Showers</h3>
                             <div id="temp-container">
-                                <span id="temp-converters">
-                                    <a href="#" id="celcius-link">C° </a> |
-                                    <a href="#" id="fahrenheit-link"> F°</a>
-                                </span>
-                                <h1>
+                                <h1 id="temp">
                                     <img 
                                     src="http://openweathermap.org/img/wn/10d@2x.png"
                                     id="icon"
-                                    alt="weather icon"> 
-                                    <span id="temp">16</span>°
+                                    alt="weather icon">16°
+                                    <span id="temp-converters">
+                                        <a href="#" id="celcius-link" class="active">C° </a> |
+                                        <a href="#" id="fahrenheit-link"> F°</a>
+                                    </span>
                                 </h1>
-
                             </div>
                             <br />
                             <ul>
@@ -68,14 +66,39 @@
                             </ul>
                         </div>
                     </div>  
-                    <div class="col-6 next-5-days">
+                    <div class="col-5 next-5-days">
                         <h3>Next 5 days</h3>
                         <ul>
-                            <li>Sun <i class="fas fa-cloud-sun weather-icon"></i> <span>19°</span></li>
-                            <li>Mon <i class="fas fa-cloud-sun weather-icon"></i> <span>22°</span></li>
-                            <li>Tues <i class="fas fa-cloud-sun weather-icon"></i> <span>18°</span></li>
-                            <li>Wed <i class="far fa-sun weather-icon"></i> <span>24°</span></li>
-                            <li>Thurs <i class="fas fa-cloud-sun weather-icon"></i> <span>28°</span></li>
+                            <li>Sun 
+                                <img 
+                                    src="http://openweathermap.org/img/wn/10d@2x.png"
+                                    id="forecast-icon"
+                                    alt="weather icon"></i> 
+                                    <span id="forecast-temp">19°</span></li>
+                            <li>Mon 
+                                <img 
+                                    src="http://openweathermap.org/img/wn/10d@2x.png"
+                                    id="forecast-icon"
+                                    alt="weather icon"></i> 
+                                    <span id="forecast-temp">22°</span></li>
+                            <li>Tues 
+                                <img 
+                                    src="http://openweathermap.org/img/wn/10d@2x.png" 
+                                    id="forecast-icon" 
+                                    alt="weather icon"> 
+                                <span id="forecast-temp">18°</span></li>
+                            <li>Wed 
+                                <img 
+                                    src="http://openweathermap.org/img/wn/10d@2x.png" 
+                                    id="forecast-icon" 
+                                    alt="weather icon"> 
+                                <span id="forecast-temp">24°</span></li>
+                            <li>Thurs 
+                                <img 
+                                    src="http://openweathermap.org/img/wn/10d@2x.png" 
+                                    id="forecast-icon" 
+                                    alt="weather icon"> 
+                                <span id="forecast-temp">28°</span></li>
                         </ul>
                     </div>
                 </div>
