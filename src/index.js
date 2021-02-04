@@ -157,11 +157,11 @@ fahrenheitChange.addEventListener("click", fahrenheitConversion);
 
 
 
-//Hourly Forecast 
+//Daily Forecast 
 
 function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
-  forecastElement.innerHTMl = null; 
+  forecastElement.innerHTML = null; 
   let forecast = null; 
 
   for (let index = 0; index < 42; index+= 7) {
@@ -176,7 +176,7 @@ function displayForecast(response) {
         <span id="forecast-temp">${Math.round(forecast.main.temp)}°</span>
       </div>
         `;
-  };
+  }
 }
 
 
