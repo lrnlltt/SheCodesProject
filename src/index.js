@@ -48,14 +48,15 @@ function formatHours(timestamp) {
   return `${hour}:${minutes}${mid}`;
 }
 
-// Display on launch 
 
-let city = document.querySelector("#city");
-city.innerHTML = "Melbourne";
+// Display on load 
+
 let apiKey = "560ccf0a9b6f4d30ed340bdb4dfaf585";
 let units = "metric";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Melbourne&appid=${apiKey}&units=${units}`
+let cityName = "Melbourne";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=${units}`;
 axios.get(`${apiUrl}`).then(getWeather);
+
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", search);
@@ -73,8 +74,8 @@ function search(event) {
       alert(`Please enter a city`);
     }
   
-  let cityName = searchInput.value;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=${units}`;
+  cityName = searchInput.value;
+  
   
   axios.get(`${apiUrl}`).then(getWeather);
 }
@@ -97,11 +98,13 @@ function showPosition(position) {
 }
 
 function getWeather(response) {
+  let celciusTemperature = response.data.main.temp; 
+  
   let iconElement = document.querySelector("#weather-icon");
 
   document.querySelector("#current-time-display").innerHTML = currentTime(response.data.dt * 1000);
   
-  document.querySelector("#temp").innerHTML = Math.round(response.data.main.temp);
+  document.querySelector("#temp").innerHTML = Math.round(celciusTemperature);
 
   document.querySelector("#city").innerHTML = response.data.name;
 
@@ -130,8 +133,12 @@ currentTempButton.addEventListener("click", getCurrentPosition);
 function celciusConversion(event) {
   event.preventDefault();
   let tempChange = document.querySelector("#temp");
-  tempChange.innerHTML = "16°";
+  tempChange.innerHTML = Math.round(celciusTemperature);
+  fahrenheitChange.classList.remove("active");
+  celciusChange.classList.add("active");
 }
+
+let celciusTemperature = null; 
 
 let celciusChange = document.querySelector("#celcius-link");
 celciusChange.addEventListener("click", celciusConversion);
@@ -139,8 +146,11 @@ celciusChange.addEventListener("click", celciusConversion);
   //Fahrenheit
 function fahrenheitConversion(event) {
   event.preventDefault();
+  let fahrenheitTemp = (celciusTemperature * 9) / 5 + 32; 
   let tempChange = document.querySelector("#temp");
-  tempChange.innerHTML = "61°";
+  tempChange.innerHTML = Math.round(fahrenheitTemp);
+  celciusChange.classList.remove("active");
+  fahrenheitChange.classList.add("active");
 }
 
 let fahrenheitChange = document.querySelector("#fahrenheit-link");

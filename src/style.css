@@ -31,10 +31,6 @@ span {
   color: #008891;
 }
 
-span #forecast-temp {
-  color: #ec8c4c;
-}
-
 .container {
   max-width: 900px;
 }
@@ -127,6 +123,10 @@ span #forecast-temp {
   color: #0872c7;
 }
 
+#forecast-temp {
+  color: #ec8c4c;
+}
+
 #temp-converters {
   font-size: 20px;
   position: relative;
@@ -134,9 +134,22 @@ span #forecast-temp {
   left: -15px;
 }
 
+#temp-converters .active {
+  color: gray;
+  cursor: default;
+}
+
+#temp-converters .active:hover {
+  text-decoration: none;
+}
+
 #temp-converters a {
   text-decoration: none;
   color: #ffa828;
+}
+
+#temp-converters a:hover {
+  text-decoration: underline;
 }
 
 #description {
