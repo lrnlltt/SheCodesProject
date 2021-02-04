@@ -103,20 +103,21 @@ span {
   border-left: solid rgba(23, 162, 184, 0.3) 5px;
   margin-top: 20px;
 }
-.next-5-days ul {
+.next-5-days {
   font-size: 25px;
   margin: 0;
 }
 
-.next-5-days ul img {
+.next-5-days img {
   max-width: 60px;
 }
 
-.next-5-days li {
+.next-5-days {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
+  flex-direction: column;
 }
 
 .weather-icon {
@@ -176,10 +177,6 @@ span {
   .next-5-days {
     border-left: 0;
     display: block;
-  }
-
-  .next-5-days ul {
-    padding: 0;
   }
 
   .search-button {
