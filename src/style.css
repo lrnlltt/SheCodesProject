@@ -108,18 +108,19 @@ span #forecast-temp {
   margin-top: 20px;
 }
 .next-5-days ul {
-  font-size: 30px;
+  font-size: 25px;
   margin: 0;
 }
 
 .next-5-days ul img {
-  max-width: 70px;
+  max-width: 60px;
 }
 
 .next-5-days li {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .weather-icon {

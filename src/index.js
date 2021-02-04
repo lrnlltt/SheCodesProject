@@ -1,7 +1,7 @@
 //Current Time 
 
-function currentTime() {
-  let now = new Date();
+function currentTime(timestamp) {
+  let now = new Date(timestamp);
 
   let days = [
     "Sunday",
@@ -14,8 +14,17 @@ function currentTime() {
   ];
 
   let day = days[now.getDay()];
-  let hour = now.getHours();
-  let twentyFourHour = now.getHours();
+
+
+  //return `${day} ${formatHours(timestamp)} `;
+}
+
+function formatHours(timestamp) {
+  let date = new Date(timestamp)
+  let hour = date.getHours();
+  let twentyFourHour = date.getHours();
+  console.log(date)
+
   if (hour < 10) {
     hour = `0${hour}`
   }
@@ -30,13 +39,13 @@ function currentTime() {
   if (twentyFourHour < 12) {
     mid = "am";
   }
-
-  let minutes = now.getMinutes();
+  
+  let minutes = date.getMinutes();
   if (minutes < 10) {
     minutes = `0${minutes}`
   }
 
-  return `${day} ${hour}:${minutes}${mid}`;
+  //return `${hour}:${minutes}${mid}`;
 }
 
 let displayTime = document.querySelector("h4");
@@ -92,8 +101,6 @@ function showPosition(position) {
 }
 
 function getWeather(response) {
-  console.log(response.data)
-
   let iconElement = document.querySelector("#weather-icon");
   
   document.querySelector("#temp").innerHTML = Math.round(response.data.main.temp);
@@ -141,47 +148,25 @@ function fahrenheitConversion(event) {
 let fahrenheitChange = document.querySelector("#fahrenheit-link");
 fahrenheitChange.addEventListener("click", fahrenheitConversion); 
 
-//5-Day Forecast 
-
-function dayCalculator() {
-  let now = new Date(); 
-
-  let day = now.getDay(); 
-
-  let forecastDay = ++day;
-   
-  let weekDays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
-  ];
-
-  let displayDay = weekDays[forecastDay];
-
-  return displayDay;
-}
-
+//Hourly Forecast 
 
 function displayForecast(response) {
-  console.log(response.data);
   let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTMl = null; 
   
 
-  for (let index = 0; index < 5; index++) {
+  for (let index = 0; index < 6; index++) {
     forecast = response.data.list[index];
     forecastElement.innerHTML += `
-          <span id="forecast-day">${dayCalculator()}</span>
-          <img 
-            src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png"
-            id="forecast-icon"
-            alt="weather icon"> 
-          <span id="forecast-temp">${Math.round(forecast.main.temp)}°</span>
-          `;
+      <li>    
+        <span id="forecast-day">${formatHours(forecast.dt * 1000)}</span>
+        <img 
+          src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png"
+          id="forecast-icon"
+          alt="weather icon"> 
+        <span id="forecast-temp">${Math.round(forecast.main.temp)}°</span>
+      </li>
+        `;
   }
 }
 
