@@ -49,6 +49,7 @@ function formatHours(timestamp) {
 }
 
 
+
 // Search Engine 
 
 function search(city) {
@@ -57,7 +58,7 @@ function search(city) {
   
   axios.get(`${apiUrl}`).then(getWeather);
 
-  let apiUrl5Day = `https://api.openweathermap.org/data/2.5/forecast?q=Melbourne&appid=${apiKey}&units=metric`
+  let apiUrl5Day = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
   axios.get(apiUrl5Day).then(displayForecast);
 }
 
@@ -124,6 +125,7 @@ let currentTempButton = document.querySelector("#current-button");
 currentTempButton.addEventListener("click", getCurrentPosition);
 
 
+
 //Temperature Conversion
   //Celcius
 function celsiusConversion(event) {
@@ -152,6 +154,8 @@ function fahrenheitConversion(event) {
 let fahrenheitChange = document.querySelector("#fahrenheit-link");
 fahrenheitChange.addEventListener("click", fahrenheitConversion); 
 
+
+
 //Hourly Forecast 
 
 function displayForecast(response) {
@@ -174,4 +178,8 @@ function displayForecast(response) {
   }
 }
 
-search("Melbourne")
+
+
+//On load
+
+search("Melbourne");
