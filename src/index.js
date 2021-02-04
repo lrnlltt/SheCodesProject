@@ -1,7 +1,7 @@
 //Current Time 
 
-function currentTime() {
-  let now = new Date();
+function currentTime(timestamp) {
+  let now = new Date(timestamp);
 
   let days = [
     "Sunday",
@@ -16,14 +16,13 @@ function currentTime() {
   let day = days[now.getDay()];
 
 
-  return `${day} ${formatHours()} `;
+  return `${day} ${formatHours(timestamp)} `;
 }
 
 function formatHours(timestamp) {
   let date = new Date(timestamp);
   let hour = date.getHours();
   let twentyFourHour = date.getHours();
-  console.log(date);
 
   if (hour < 10) {
     hour = `0${hour}`
@@ -49,8 +48,18 @@ function formatHours(timestamp) {
   return `${hour}:${minutes}${mid}`;
 }
 
-let displayTime = document.querySelector("h4");
-displayTime.innerHTML = currentTime();
+// Display on launch 
+
+let city = document.querySelector("#city");
+city.innerHTML = "Melbourne";
+let apiKey = "560ccf0a9b6f4d30ed340bdb4dfaf585";
+let units = "metric";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Melbourne&appid=${apiKey}&units=${units}`
+axios.get(`${apiUrl}`).then(getWeather);
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", search);
+
 
 // Search Engine 
 
@@ -63,26 +72,12 @@ function search(event) {
     } else {
       alert(`Please enter a city`);
     }
-
   
   let cityName = searchInput.value;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=${units}`;
   
   axios.get(`${apiUrl}`).then(getWeather);
 }
-
-
-// Display on launch 
-
-let city = document.querySelector("#city");
-city.innerHTML = "Melbourne";
-let apiKey = "560ccf0a9b6f4d30ed340bdb4dfaf585";
-let units = "metric";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Melbourne&appid=${apiKey}&units=${units}`
-axios.get(`${apiUrl}`).then(getWeather);
-
-let form = document.querySelector("#search-form");
-form.addEventListener("submit", search);
 
 
 // Current Temp & Current Location Button Changes
@@ -103,6 +98,8 @@ function showPosition(position) {
 
 function getWeather(response) {
   let iconElement = document.querySelector("#weather-icon");
+
+  document.querySelector("#current-time-display").innerHTML = currentTime(response.data.dt * 1000);
   
   document.querySelector("#temp").innerHTML = Math.round(response.data.main.temp);
 
