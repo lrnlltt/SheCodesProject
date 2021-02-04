@@ -142,3 +142,45 @@ span #forecast-temp {
 #description {
   text-transform: capitalize;
 }
+
+@media screen and (max-width: 760px) {
+  card-body {
+    display: flex;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  li {
+    font-size: 16px;
+  }
+
+  .next-5-days {
+    border-left: 0;
+    display: block;
+  }
+
+  .next-5-days ul {
+    padding: 0;
+  }
+
+  .search-button {
+    margin-left: 0px;
+  }
+
+  #buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  #search-bar {
+    width: 100px;
+  }
+}
