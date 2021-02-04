@@ -61,6 +61,7 @@ axios.get(`${apiUrl}`).then(getWeather);
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", search);
 
+let celsiusTemperature = null; 
 
 // Search Engine 
 
@@ -137,8 +138,6 @@ function celsiusConversion(event) {
   fahrenheitChange.classList.remove("active");
   celsiusChange.classList.add("active");
 }
-
-let celsiusTemperature = null; 
 
 let celsiusChange = document.querySelector("#celcius-link");
 celsiusChange.addEventListener("click", celsiusConversion);
