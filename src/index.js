@@ -49,37 +49,33 @@ function formatHours(timestamp) {
 }
 
 
-// Display on load 
-
-let apiKey = "560ccf0a9b6f4d30ed340bdb4dfaf585";
-let units = "metric";
-let cityName = "Melbourne";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=${units}`;
-axios.get(`${apiUrl}`).then(getWeather);
-
-
-let form = document.querySelector("#search-form");
-form.addEventListener("submit", search);
-
-let celsiusTemperature = null; 
-
 // Search Engine 
 
-function search(event) {
+function search(city) {
+  let apiKey = "560ccf0a9b6f4d30ed340bdb4dfaf585";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  
+  axios.get(`${apiUrl}`).then(getWeather);
+
+  let apiUrl5Day = `https://api.openweathermap.org/data/2.5/forecast?q=Melbourne&appid=${apiKey}&units=metric`
+  axios.get(apiUrl5Day).then(displayForecast);
+}
+
+function handleSubmit(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-bar");
-
     if (searchInput.value) {
         city.innerHTML = `${searchInput.value}`; 
     } else {
       alert(`Please enter a city`);
     }
   
-  cityName = searchInput.value;
-  
-  
-  axios.get(`${apiUrl}`).then(getWeather);
+  search(searchInput.value);
 }
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
+
 
 
 // Current Temp & Current Location Button Changes
@@ -91,17 +87,16 @@ function getCurrentPosition() {
 function showPosition(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude; 
-  let unit = "metric"
   let apiKey = "560ccf0a9b6f4d30ed340bdb4dfaf585";
-  let urlApi = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${unit}&appid=${apiKey}`;
+  let urlApi = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
 
   axios.get(urlApi).then(getWeather);
 }
 
 function getWeather(response) {
-  let celsiusTemperature = response.data.main.temp; 
-  
   let iconElement = document.querySelector("#weather-icon");
+
+  celsiusTemperature = response.data.main.temp; 
 
   document.querySelector("#current-time-display").innerHTML = currentTime(response.data.dt * 1000);
   
@@ -139,6 +134,8 @@ function celsiusConversion(event) {
   celsiusChange.classList.add("active");
 }
 
+let celsiusTemperature = null; 
+
 let celsiusChange = document.querySelector("#celcius-link");
 celsiusChange.addEventListener("click", celsiusConversion);
 
@@ -160,7 +157,7 @@ fahrenheitChange.addEventListener("click", fahrenheitConversion);
 function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTMl = null; 
-  
+  let forecast = null; 
 
   for (let index = 0; index < 6; index++) {
     forecast = response.data.list[index];
@@ -177,5 +174,4 @@ function displayForecast(response) {
   }
 }
 
-let apiUrl5Day = `https://api.openweathermap.org/data/2.5/forecast?q=Melbourne&appid=${apiKey}&units=${units}`
-axios.get(apiUrl5Day).then(displayForecast);
+search("Melbourne")
