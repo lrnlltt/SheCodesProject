@@ -98,13 +98,13 @@ function showPosition(position) {
 }
 
 function getWeather(response) {
-  let celciusTemperature = response.data.main.temp; 
+  let celsiusTemperature = response.data.main.temp; 
   
   let iconElement = document.querySelector("#weather-icon");
 
   document.querySelector("#current-time-display").innerHTML = currentTime(response.data.dt * 1000);
   
-  document.querySelector("#temp").innerHTML = Math.round(celciusTemperature);
+  document.querySelector("#temp").innerHTML = Math.round(celsiusTemperature);
 
   document.querySelector("#city").innerHTML = response.data.name;
 
@@ -130,26 +130,26 @@ currentTempButton.addEventListener("click", getCurrentPosition);
 
 //Temperature Conversion
   //Celcius
-function celciusConversion(event) {
+function celsiusConversion(event) {
   event.preventDefault();
   let tempChange = document.querySelector("#temp");
-  tempChange.innerHTML = Math.round(celciusTemperature);
+  tempChange.innerHTML = Math.round(celsiusTemperature);
   fahrenheitChange.classList.remove("active");
-  celciusChange.classList.add("active");
+  celsiusChange.classList.add("active");
 }
 
-let celciusTemperature = null; 
+let celsiusTemperature = null; 
 
-let celciusChange = document.querySelector("#celcius-link");
-celciusChange.addEventListener("click", celciusConversion);
+let celsiusChange = document.querySelector("#celcius-link");
+celsiusChange.addEventListener("click", celsiusConversion);
 
   //Fahrenheit
 function fahrenheitConversion(event) {
   event.preventDefault();
-  let fahrenheitTemp = (celciusTemperature * 9) / 5 + 32; 
+  let fahrenheitTemp = (celsiusTemperature * 9) / 5 + 32; 
   let tempChange = document.querySelector("#temp");
   tempChange.innerHTML = Math.round(fahrenheitTemp);
-  celciusChange.classList.remove("active");
+  celsiusChange.classList.remove("active");
   fahrenheitChange.classList.add("active");
 }
 
