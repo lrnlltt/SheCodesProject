@@ -1,7 +1,7 @@
 //Current Time 
 
-function currentTime(timestamp) {
-  let now = new Date(timestamp);
+function currentTime() {
+  let now = new Date();
 
   let days = [
     "Sunday",
@@ -16,14 +16,14 @@ function currentTime(timestamp) {
   let day = days[now.getDay()];
 
 
-  //return `${day} ${formatHours(timestamp)} `;
+  return `${day} ${formatHours()} `;
 }
 
 function formatHours(timestamp) {
-  let date = new Date(timestamp)
+  let date = new Date(timestamp);
   let hour = date.getHours();
   let twentyFourHour = date.getHours();
-  console.log(date)
+  console.log(date);
 
   if (hour < 10) {
     hour = `0${hour}`
@@ -35,17 +35,18 @@ function formatHours(timestamp) {
   }
   if (hour === 0) {
     hour = 12;
-  }
+  };
+
   if (twentyFourHour < 12) {
     mid = "am";
-  }
+  };
   
   let minutes = date.getMinutes();
   if (minutes < 10) {
     minutes = `0${minutes}`
-  }
+  };
 
-  //return `${hour}:${minutes}${mid}`;
+  return `${hour}:${minutes}${mid}`;
 }
 
 let displayTime = document.querySelector("h4");
